@@ -9,42 +9,97 @@
 <body>
 
     <div id="nav">
-        
-
-        <p class="nav-tag">Egyenleg: 200.000ft</p>
+        <p class="nav-tag">Ft</p>
+        <input type="text" class="nav-tag" id="egyenleg" value="0" disabled style="width: 50px;">
+        <p class="nav-tag">Egyenleg:</p>
         <p class="nav-tag">4jatek</p>
         <p class="nav-tag">3jatek</p>
         <p class="nav-tag">2jatek</p>
         <p class="nav-tag">1jatek</p>
     </div>
     <h1 class="cim">Online Casino</h1>
+    <input type="button" id="penzfeltolt" value="Pénz feltöltés" onclick="szamlalo()">
 
-
-    <div id="jatekok-top">
-        <div class="jatek1">
-            <h1>Póker</h1>
-            <p>Alap tét: 100ft</p>
-        </div>    
-
-        <div class="jatek2">
-            <h1>Slot</h1>
-            <p>Alap tét: 100ft</p>
+    <div id="jatek-nav">
+        <div id="jatekok-top">
+            <div class="jatek1">
+                <h1>Póker</h1>
+                <p>Alap tét: 100ft</p>
+            </div>    
+    
+            <div class="jatek2">
+                <h1>Slot</h1>
+                <p>Alap tét: 100ft</p>
+            </div>
+    
         </div>
-
-    </div>
-
-    <div id="jatekok-bottom">
-        <div class="jatek3">
-            <h1>Póker2</h1>
-            <p>Alap tét: 100ft</p>
-        </div>
-
-        <div class="jatek4">
-            <h1>Póker3</h1>
-            <p>Alap tét: 100ft</p>
+    
+        <div id="jatekok-bottom">
+            <div class="jatek3">
+                <h1>Póker2</h1>
+                <p>Alap tét: 100ft</p>
+            </div>
+    
+            <div class="jatek4">
+                <h1>Póker3</h1>
+                <p>Alap tét: 100ft</p>
+            </div>
         </div>
     </div>
     
 
+    <form name="tetek">
+        <div id="poker">
+            <h1>Póker</h1>
+            <p>Tét megrakása</p>
+            <input type="button" id="poker100" value="100" onclick="szamlalo()">
+            <input type="button" id="poker500" value="500" onclick="szamlalo()">
+            <input type="button" id="poker1000" value="1000" onclick="szamlalo()">
+        </div>
+    </form>
+    
+
+    
+    <script>
+        egyenleg = 1000
+        document.getElementById('egyenleg').value = egyenleg
+        function szamlalo() {
+
+            document.getElementById('penzfeltolt').onclick = function() {
+                document.getElementById('egyenleg').value = egyenleg = egyeleg + 1000
+            }
+
+            document.getElementById('poker100').onclick = function() {
+                if (egyenleg < 100) {
+                    alert('Nincs elegendő pénz az egyenlegeden.')
+                }
+                else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 100
+                }
+            }
+
+            document.getElementById('poker500').onclick = function() {
+                if (egyenleg < 500) {
+                    alert('Nincs elegendő pénz az egyenlegeden.')
+                }
+                else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 500
+                }
+            }    
+            
+            document.getElementById('poker1000').onclick = function() {
+                if (egyenleg < 1000) {
+                    alert('Nincs elegendő pénz az egyenlegeden.')
+                }
+                else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 1000
+                }
+            }
+
+
+        }
+
+
+    </script>
 </body>
 </html>

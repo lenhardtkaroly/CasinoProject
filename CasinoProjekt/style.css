@@ -8,7 +8,10 @@
     margin-left: 50px;
 }
 
-
+#jatek-nav {
+    margin: auto;
+    width: 35%;
+}
 
 .nav-tag {
     float: right;
@@ -19,7 +22,7 @@
 #jatekok-top {
     overflow: hidden;
     margin-top: 15%;
-    margin-left: 500px;
+ 
 }
 
 .jatek1 {
@@ -45,7 +48,6 @@
 
 #jatekok-bottom {
     overflow: hidden;
-    margin-left: 500px;
 }
 
 .jatek3 {
@@ -71,4 +73,12 @@
 
 .jatek4 h1,p {
     text-align: center;
+}
+
+#poker {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+    padding: 10%;
 }
