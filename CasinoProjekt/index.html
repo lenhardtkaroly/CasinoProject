@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Casino</title>
 </head>
+
 <body>
 
     <div id="nav">
@@ -25,28 +27,28 @@
             <div class="jatek1">
                 <h1>Póker</h1>
                 <p>Alap tét: 100ft</p>
-            </div>    
-    
+            </div>
+
             <div class="jatek2">
                 <h1>Slot</h1>
                 <p>Alap tét: 100ft</p>
             </div>
-    
+
         </div>
-    
+
         <div id="jatekok-bottom">
             <div class="jatek3">
                 <h1>Póker2</h1>
                 <p>Alap tét: 100ft</p>
             </div>
-    
+
             <div class="jatek4">
                 <h1>Póker3</h1>
                 <p>Alap tét: 100ft</p>
             </div>
         </div>
     </div>
-    
+
 
     <form name="tetek">
         <div id="blackjack">
@@ -70,9 +72,28 @@
             <input type="button" value="HÚZ" id="huz" disabled>
         </div>
     </form>
-    
 
-    
+
+    <!-- Kockapóker html rész -->
+
+
+    <form name="tetek1">
+        <div id="kockapoker">
+            <h1>kockapóker</h1>
+
+            <p>A dobásaid:</p>
+            <input type="text" id="dobasok" disabled>
+
+            <p>Az eredményed:</p>
+            <input type="text" id="dobasok_eredmenyek" disabled>
+
+            <p></p>
+            <input type='button' id="dobas" value='Dobások!' onclick="kockapoker()"> 
+
+
+        </div>
+    </form>
+
     <script>
         egyenleg = 1000
         blackjacktet = 0
@@ -80,11 +101,11 @@
         document.getElementById('egyenleg').value = egyenleg
         function szamlalo() {
 
-            document.getElementById('penzfeltolt').onclick = function() {
+            document.getElementById('penzfeltolt').onclick = function () {
                 document.getElementById('egyenleg').value = egyenleg = egyenleg + 1000
             }
 
-            document.getElementById('blackjack100').onclick = function() {
+            document.getElementById('blackjack100').onclick = function () {
                 if (egyenleg < 100) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -94,7 +115,7 @@
                 }
             }
 
-            document.getElementById('blackjack500').onclick = function() {
+            document.getElementById('blackjack500').onclick = function () {
                 if (egyenleg < 500) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -102,9 +123,9 @@
                     document.getElementById('egyenleg').value = egyenleg = egyenleg - 500
                     document.getElementById('tetossz').value = blackjacktet = blackjacktet + 500
                 }
-            }    
-            
-            document.getElementById('blackjack1000').onclick = function() {
+            }
+
+            document.getElementById('blackjack1000').onclick = function () {
                 if (egyenleg < 1000) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -114,7 +135,7 @@
                 }
             }
 
-            document.getElementById('reset').onclick = function() {
+            document.getElementById('reset').onclick = function () {
                 document.getElementById('egyenleg').value = egyenleg = egyenleg + blackjacktet
                 document.getElementById('tetossz').value = blackjacktet = 0
             }
@@ -126,38 +147,38 @@
             jatekosossz = 0
 
             if (blackjacktet != 0) {
-                document.getElementById('userkartya').value = jatekosossz = jatekosossz + Math.floor(Math.random() * 11) + 3 
-                setTimeout(function() {
+                document.getElementById('userkartya').value = jatekosossz = jatekosossz + Math.floor(Math.random() * 11) + 3
+                setTimeout(function () {
                     document.getElementById('userkartya').value = jatekosossz = jatekosossz + Math.floor(Math.random() * 11) + 3;
                 }, 3000);
 
-                document.getElementById('huz').onclick = function() {
+                document.getElementById('huz').onclick = function () {
                     document.getElementById('huz').disabled = true
                     document.getElementById('tart').disabled = true
 
-                    document.getElementById('userkartya').value = jatekosossz = jatekosossz + Math.floor(Math.random() * 11) + 3 
+                    document.getElementById('userkartya').value = jatekosossz = jatekosossz + Math.floor(Math.random() * 11) + 3
 
-                    for(i = 0; i < 3; i++) {
-                        document.getElementById('osztokartya').value = osztoossz = osztoossz + Math.floor(Math.random() * 11) + 1 
+                    for (i = 0; i < 3; i++) {
+                        document.getElementById('osztokartya').value = osztoossz = osztoossz + Math.floor(Math.random() * 11) + 1
                     }
 
                     eredmeny()
                 }
 
-                document.getElementById('tart').onclick = function() {
+                document.getElementById('tart').onclick = function () {
                     document.getElementById('huz').disabled = true
                     document.getElementById('tart').disabled = true
-                    
-                    for(i = 0; i < 3; i++) {
-                        document.getElementById('osztokartya').value = osztoossz = osztoossz + Math.floor(Math.random() * 11) + 1 
+
+                    for (i = 0; i < 3; i++) {
+                        document.getElementById('osztokartya').value = osztoossz = osztoossz + Math.floor(Math.random() * 11) + 1
                     }
                     eredmeny()
                 }
 
             }
-            else {alert('Kérlek tegyél tétet')}
+            else { alert('Kérlek tegyél tétet') }
 
-            
+
         }
 
         function eredmeny() {
@@ -188,7 +209,7 @@
         }
 
         function indito() {
-            document.getElementById('blackjackindito').onclick = function() {
+            document.getElementById('blackjackindito').onclick = function () {
                 document.getElementById('blackjack100').disabled = true
                 document.getElementById('blackjack500').disabled = true
                 document.getElementById('blackjack1000').disabled = true
@@ -199,9 +220,36 @@
 
                 blackjack()
             }
+
         }
+
+
+
+        //Kockapóker script
+
+        szamok = ''
+        function kockapoker() {
+
+            i = 1
+
+            for (i = 1; i <= 5; i++) {
+                dobasszam = Math.floor(Math.random() * 6) + 1
+                szamok = szamok + '' + dobasszam
+            }
+
+            document.getElementById('dobas').onclick = function(){
+                document.getElementById('dobasok').value = dobasszam
+            }
+
+            
+
+            
+        }
+
+
 
 
     </script>
 </body>
+
 </html>
