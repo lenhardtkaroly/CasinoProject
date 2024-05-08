@@ -1,0 +1,84 @@
+#nav {
+    background-color: grey;
+}
+
+.cim {
+    width: 200px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#jatek-nav {
+    margin: auto;
+    width: 35%;
+}
+
+.nav-tag {
+    float: right;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#jatekok-top {
+    overflow: hidden;
+    margin-top: 15%;
+ 
+}
+
+.jatek1 {
+    border: 5px solid black;
+    width: 200px;
+    float: left;
+    margin-right: 100px;
+}
+
+.jatek1 h1,p {
+    text-align: center;
+}
+
+.jatek2 {
+    border: 5px solid black;
+    width: 200px;
+    overflow: hidden;
+}
+
+.jatek2 h1,p {
+    text-align: center;
+}
+
+#jatekok-bottom {
+    overflow: hidden;
+}
+
+.jatek3 {
+    border: 5px solid black;
+    width: 200px;
+    float: left;
+    margin-top: 60px;
+    margin-right: 100px;
+    
+}
+
+.jatek3 h1,p {
+    text-align: center;
+}
+
+.jatek4 {
+    border: 5px solid black;
+    width: 200px;
+    margin: 60px;
+    overflow: hidden;
+
+}
+
+.jatek4 h1,p {
+    text-align: center;
+}
+
+#blackjack {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+
+}
