@@ -82,7 +82,11 @@
             <h1>kockapóker</h1>
 
             <p>A dobásaid:</p>
-            <input type="text" id="dobasok" disabled>
+            <input type="text" id="dobasok1" disabled style="width: 20px;">
+            <input type="text" id="dobasok2" disabled style="width: 20px;">
+            <input type="text" id="dobasok3" disabled style="width: 20px;">
+            <input type="text" id="dobasok4" disabled style="width: 20px;">
+            <input type="text" id="dobasok5" disabled style="width: 20px;">
 
             <p>Az eredményed:</p>
             <input type="text" id="dobasok_eredmenyek" disabled>
@@ -232,13 +236,24 @@
 
             i = 1
 
-            for (i = 1; i <= 5; i++) {
-                dobasszam = Math.floor(Math.random() * 6) + 1
-                szamok = szamok + '' + dobasszam
-            }
+            
 
             document.getElementById('dobas').onclick = function(){
-                document.getElementById('dobasok').value = dobasszam
+                document.getElementById('dobas').disabled = true
+                dobasszam = Math.floor(Math.random() * 6) + 1 
+                document.getElementById('dobasok1').value = dobasszam
+            
+                dobasszam = Math.floor(Math.random() * 6) + 1 
+                document.getElementById('dobasok2').value = dobasszam
+
+                dobasszam = Math.floor(Math.random() * 6) + 1 
+                document.getElementById('dobasok3').value = dobasszam
+
+                dobasszam = Math.floor(Math.random() * 6) + 1 
+                document.getElementById('dobasok4').value = dobasszam
+
+                dobasszam = Math.floor(Math.random() * 6) + 1 
+                document.getElementById('dobasok5').value = dobasszam
             }
 
             
