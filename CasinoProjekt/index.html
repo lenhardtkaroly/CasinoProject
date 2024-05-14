@@ -22,94 +22,84 @@
     <h1 class="cim">Online Casino</h1>
     <input type="button" id="penzfeltolt" value="Pénz feltöltés" onclick="szamlalo()">
 
-    <div id="jatek-nav">
-        <div id="jatekok-top">
-            <div class="jatek1">
-                <h1>Póker</h1>
-                <p>Alap tét: 100ft</p>
+    <div id="jatekok">
+        <form name="tetek">
+            <div id="blackjack">
+                <h1>blackjack</h1>
+    
+                <p>Osztó kártyái:</p>
+                <input type="text" id="osztokartya" disabled>
+                <p>Te kártyáid:</p>
+                <input type="text" id="userkartya" disabled>
+    
+                <p>Tét megrakása</p>
+                <input type="button" id="blackjack100" value="100" onclick="szamlalo()">
+                <input type="button" id="blackjack500" value="500" onclick="szamlalo()">
+                <input type="button" id="blackjack1000" value="1000" onclick="szamlalo()">
+                <input type="button" id="reset" value="RESET" onclick="szamlalo()" disabled>
+                <p></p>
+                <input type="text" id="tetossz" value="0" style="width: 70px;" disabled>
+                <p></p>
+                <input type="button" value="TART" id="tart" disabled>
+                <input type="button" id="blackjackindito" value="START" onclick="indito()">
+                <input type="button" value="HÚZ" id="huz" disabled>
             </div>
+        </form>
+    
+    
+        <!-- Kockapóker html rész -->
+    
+    
+        <form name="tetek1">
+            <div id="kockapoker">
+                <h1>kockapóker</h1>
+    
+                <p>A dobásaid:</p>
+                <input type="text" id="dobasok1" disabled style="width: 20px;">
+                <input type="text" id="dobasok2" disabled style="width: 20px;">
+                <input type="text" id="dobasok3" disabled style="width: 20px;">
+                <input type="text" id="dobasok4" disabled style="width: 20px;">
+                <input type="text" id="dobasok5" disabled style="width: 20px;">
+    
+                <p>Az eredményed:</p>
+                <input type="text" id="dobasok_eredmenyek" disabled>
+    
+                <p></p>
+                <input type='button' id="dobas" value='Dobások!' onclick="kockapoker()"> 
+    
+    
+            </div>
+        </form>
 
-            <div class="jatek2">
+        <form name="tetek2">
+            <div id="slot">
                 <h1>Slot</h1>
-                <p>Alap tét: 100ft</p>
-            </div>
 
-        </div>
+                <img src="">
+                <img id="slotkep2">
+                <img id="slotkep3">
 
-        <div id="jatekok-bottom">
-            <div class="jatek3">
-                <h1>Póker2</h1>
-                <p>Alap tét: 100ft</p>
+                <input type="button" value="Start" onclick="slot()">
             </div>
-
-            <div class="jatek4">
-                <h1>Póker3</h1>
-                <p>Alap tét: 100ft</p>
-            </div>
-        </div>
+        </form>
     </div>
 
 
-    <form name="tetek">
-        <div id="blackjack">
-            <h1>blackjack</h1>
-
-            <p>Osztó kártyái:</p>
-            <input type="text" id="osztokartya" disabled>
-            <p>Te kártyáid:</p>
-            <input type="text" id="userkartya" disabled>
-
-            <p>Tét megrakása</p>
-            <input type="button" id="blackjack100" value="100" onclick="szamlalo()">
-            <input type="button" id="blackjack500" value="500" onclick="szamlalo()">
-            <input type="button" id="blackjack1000" value="1000" onclick="szamlalo()">
-            <input type="button" id="reset" value="RESET" onclick="szamlalo()">
-            <p></p>
-            <input type="text" id="tetossz" value="0" style="width: 70px;" disabled>
-            <p></p>
-            <input type="button" value="TART" id="tart" disabled>
-            <input type="button" id="blackjackindito" value="START" onclick="indito()">
-            <input type="button" value="HÚZ" id="huz" disabled>
-        </div>
-    </form>
-
-
-    <!-- Kockapóker html rész -->
-
-
-    <form name="tetek1">
-        <div id="kockapoker">
-            <h1>kockapóker</h1>
-
-            <p>A dobásaid:</p>
-            <input type="text" id="dobasok1" disabled style="width: 20px;">
-            <input type="text" id="dobasok2" disabled style="width: 20px;">
-            <input type="text" id="dobasok3" disabled style="width: 20px;">
-            <input type="text" id="dobasok4" disabled style="width: 20px;">
-            <input type="text" id="dobasok5" disabled style="width: 20px;">
-
-            <p>Az eredményed:</p>
-            <input type="text" id="dobasok_eredmenyek" disabled>
-
-            <p></p>
-            <input type='button' id="dobas" value='Dobások!' onclick="kockapoker()"> 
-
-
-        </div>
-    </form>
+    
 
     <script>
         egyenleg = 1000
-        blackjacktet = 0
+        
 
         document.getElementById('egyenleg').value = egyenleg
         function szamlalo() {
-
+            blackjacktet = 0
             document.getElementById('penzfeltolt').onclick = function () {
                 document.getElementById('egyenleg').value = egyenleg = egyenleg + 1000
             }
 
             document.getElementById('blackjack100').onclick = function () {
+                document.getElementById('reset').disabled = false
                 if (egyenleg < 100) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -120,6 +110,7 @@
             }
 
             document.getElementById('blackjack500').onclick = function () {
+                document.getElementById('reset').disabled = false
                 if (egyenleg < 500) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -130,6 +121,7 @@
             }
 
             document.getElementById('blackjack1000').onclick = function () {
+                document.getElementById('reset').disabled = false
                 if (egyenleg < 1000) {
                     alert('Nincs elegendő pénz az egyenlegeden.')
                 }
@@ -142,6 +134,7 @@
             document.getElementById('reset').onclick = function () {
                 document.getElementById('egyenleg').value = egyenleg = egyenleg + blackjacktet
                 document.getElementById('tetossz').value = blackjacktet = 0
+                document.getElementById('reset').disabled = true
             }
         }
 
@@ -201,11 +194,12 @@
             else if (21 - osztoossz > 21 - jatekosossz) {
                 alert('Vesztettél')
             }
+            blackjacktet = 0
+            document.getElementById('tetossz').value = tetossz = 0
 
             document.getElementById('blackjack100').disabled = false
             document.getElementById('blackjack500').disabled = false
             document.getElementById('blackjack1000').disabled = false
-            document.getElementById('reset').disabled = false
             document.getElementById('blackjackindito').disabled = false
             document.getElementById('tart').disabled = true
             document.getElementById('huz').disabled = true
@@ -262,7 +256,16 @@
         }
 
 
+        function slot() {
 
+            slotkepekfile = ["<img src='1.png'>", "<img src='2.png'>", "<img src='3.png'>", "<img src='kocka/4.png'>", "<img src='kocka/5.png'>"]
+
+            slotrand1 = Math.floor(Math.random() * 6) + 1 
+            document.getElementById('dobasok3').value = dobasszam
+
+            document.getElementById('slotkep1').src = '1.jpg'
+
+        }
 
     </script>
 </body>
