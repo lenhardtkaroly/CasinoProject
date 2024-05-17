@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kockapóker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kockapóker Szimuláció</h1>
+    <button onclick="runSimulation()">Dobás</button>
+    <div class="results" id="results"></div>
+</div>
+
+<script>
+    function dobKockak() {
+        return Array.from({length: 5}, () => Math.floor(Math.random() * 6) + 1);
+    }
+
+    function ellenorizDupla(kockak) {
+        return kockak.some(kocka => kockak.filter(k => k === kocka).length === 2);
+    }
+
+    function ellenorizTripla(kockak) {
+        return kockak.some(kocka => kockak.filter(k => k === kocka).length === 3);
+    }
+
+    function ellenorizDuplaTripla(kockak) {
+        return ellenorizDupla(kockak) && ellenorizTripla(kockak);
+    }
+
+    function ellenorizKisSor(kockak) {
+        kockak.sort((a, b) => a - b);
+        return kockak.slice(0, -1).every((val, index) => val + 1 === kockak[index + 1]);
+    }
+
+    function ellenorizNagySor(kockak) {
+        kockak.sort((a, b) => a - b);
+        return kockak.every((val, index) => index === 0 || val === kockak[index - 1] + 1);
+    }
+
+    function kockapoker(kockak) {
+        const kockakStr = kockak.join(", ");
+        if (ellenorizDuplaTripla(kockak)) {
+            return `Dobások: ${kockakStr}. Eredmény: Dupla tirpla`;
+        } else if (ellenorizKisSor(kockak)) {
+            return `Dobások: ${kockakStr}. Eredmény: Kis sor`;
+        } else if (ellenorizNagySor(kockak)) {
+            return `Dobások: ${kockakStr}. Eredmény: Nagy sor`;
+        } else if (ellenorizTripla(kockak)) {
+            return `Dobások: ${kockakStr}. Eredmény: Tripla`;
+        } else if (ellenorizDupla(kockak)) {
+            return `Dobások: ${kockakStr}. Eredmény: Dupla`;
+        } else {
+            return `Dobások: ${kockakStr}. Eredmény: Nincs semmi`;
+        }
+    }
+
+    //a ciklus növelésével tudod szabályozni, hogy hányszor generálja le.
+    function runSimulation() {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = ''; // Clear previous results
+        for (let i = 0; i < 1; i++) {
+            const kockak = dobKockak();
+            const result = kockapoker(kockak);
+            const resultElement = document.createElement('p');
+            resultElement.textContent = result;
+            resultsDiv.appendChild(resultElement);
+        }
+    }
+</script>
+
+</body>
+</html>
