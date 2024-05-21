@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Casino</title>
 </head>
 
@@ -75,9 +75,9 @@
             <div id="slot">
                 <h1>Slot</h1>
 
-                <img src="">
-                <img id="slotkep2">
-                <img id="slotkep3">
+                <img src="4.jpg" id="slotkep1" class="slotkepkezdo">
+                <img src="4.jpg" id="slotkep2" class="slotkepkezdo">
+                <img src="4.jpg" id="slotkep3" class="slotkepkezdo">
 
                 <input type="button" value="Start" onclick="slot()">
             </div>
@@ -258,12 +258,24 @@
 
         function slot() {
 
-            slotkepekfile = ["<img src='1.png'>", "<img src='2.png'>", "<img src='3.png'>", "<img src='kocka/4.png'>", "<img src='kocka/5.png'>"]
+            slotkepekfile = ["kepek/1.jpg", "kepek/2.jpg", "kepek/3.jpg", "kepek/4.jpg", "kepek/5.jpg", "kepek/6.jpg", "kepek/7.jpg", "kepek/8.jpg"]
+            slotrand1 = Math.floor(Math.random() * 7)
+            
+            document.getElementById('slotkep1').src = slotkepekfile[slotrand1]
 
-            slotrand1 = Math.floor(Math.random() * 6) + 1 
-            document.getElementById('dobasok3').value = dobasszam
+            slotkepekfile2 = ["kepek/1.jpg", "kepek/2.jpg", "kepek/3.jpg", "kepek/4.jpg", "kepek/5.jpg", "kepek/6.jpg", "kepek/7.jpg", "kepek/8.jpg"]
+            slotrand2 = Math.floor(Math.random() * 7)
+            
+            document.getElementById('slotkep2').src = slotkepekfile2[slotrand2]
 
-            document.getElementById('slotkep1').src = '1.jpg'
+            slotkepekfile3 = ["kepek/1.jpg", "kepek/2.jpg", "kepek/3.jpg", "kepek/4.jpg", "kepek/5.jpg", "kepek/6.jpg", "kepek/7.jpg", "kepek/8.jpg"]
+            slotrand3 = Math.floor(Math.random() * 7)
+            
+            document.getElementById('slotkep3').src = slotkepekfile3[slotrand3]
+
+            if (slotkepekfile[slotrand1] == slotkepekfile2[slotrand2] && slotkepekfile[slotrand1] == slotkepekfile3[slotrand3]) {
+                alert('Nyertél')
+            }
 
         }
 
