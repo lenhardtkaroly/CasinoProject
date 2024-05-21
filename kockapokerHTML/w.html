@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Casino</title>
+</head>
+
+<body>
+
+    <div id="nav">
+        <p class="nav-tag">Ft</p>
+        <input type="text" class="nav-tag" id="egyenleg" value="0" disabled style="width: 50px;">
+        <p class="nav-tag">Egyenleg:</p>
+        <p class="nav-tag">4jatek</p>
+        <p class="nav-tag">3jatek</p>
+        <p class="nav-tag">2jatek</p>
+        <p class="nav-tag">1jatek</p>
+    </div>
+    <h1 class="cim">Online Casino</h1>
+    <input type="button" id="penzfeltolt" value="Pénz feltöltés" onclick="szamlalo()">
+
+    <div id="jatekok">
+        <form name="tetek">
+            <div id="blackjack">
+                <h1>blackjack</h1>
+
+                <p>Osztó kártyái:</p>
+                <input type="text" id="osztokartya" disabled>
+                <p>Te kártyáid:</p>
+                <input type="text" id="userkartya" disabled>
+
+                <p>Tét megrakása</p>
+                <input type="button" id="blackjack100" value="100" onclick="szamlalo()">
+                <input type="button" id="blackjack500" value="500" onclick="szamlalo()">
+                <input type="button" id="blackjack1000" value="1000" onclick="szamlalo()">
+                <input type="button" id="reset" value="RESET" onclick="szamlalo()" disabled>
+                <p></p>
+                <input type="text" id="tetossz" value="0" style="width: 70px;" disabled>
+                <p></p>
+                <input type="button" value="TART" id="tart" disabled>
+                <input type="button" id="blackjackindito" value="START" onclick="indito()">
+                <input type="button" value="HÚZ" id="huz" disabled>
+            </div>
+        </form>
+
+
+        <!-- Kockapóker html rész -->
+
+
+        <form name="tetek1">
+            <div id="kockapoker">
+                <div class="container">
+                    <h1>Kockapóker</h1>
+                    <button type="button" onclick="runSimulation()">Dobás</button>
+                    <div class="results" id="results"></div>
+                </div>
+            </div>
+        </form>
+
+        <form name="tetek2">
+            <div id="slot">
+                <h1>Slot</h1>
+
+                <img src="">
+                <img id="slotkep2">
+                <img id="slotkep3">
+
+                <input type="button" value="Start" onclick="slot()">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let egyenleg = 1000;
+        document.getElementById('egyenleg').value = egyenleg;
+
+        function szamlalo() {
+            let blackjacktet = 0;
+            document.getElementById('penzfeltolt').onclick = function () {
+                document.getElementById('egyenleg').value = egyenleg = egyenleg + 1000;
+            }
+
+            document.getElementById('blackjack100').onclick = function () {
+                document.getElementById('reset').disabled = false;
+                if (egyenleg < 100) {
+                    alert('Nincs elegendő pénz az egyenlegeden.');
+                } else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 100;
+                    document.getElementById('tetossz').value = blackjacktet = blackjacktet + 100;
+                }
+            }
+
+            document.getElementById('blackjack500').onclick = function () {
+                document.getElementById('reset').disabled = false;
+                if (egyenleg < 500) {
+                    alert('Nincs elegendő pénz az egyenlegeden.');
+                } else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 500;
+                    document.getElementById('tetossz').value = blackjacktet = blackjacktet + 500;
+                }
+            }
+
+            document.getElementById('blackjack1000').onclick = function () {
+                document.getElementById('reset').disabled = false;
+                if (egyenleg < 1000) {
+                    alert('Nincs elegendő pénz az egyenlegeden.');
+                } else {
+                    document.getElementById('egyenleg').value = egyenleg = egyenleg - 1000;
+                    document.getElementById('tetossz').value = blackjacktet = blackjacktet + 1000;
+                }
+            }
+
+            document.getElementById('reset').onclick = function () {
+                document.getElementById('egyenleg').value = egyenleg = egyenleg + blackjacktet;
+                document.getElementById('tetossz').value = blackjacktet = 0;
+                document.getElementById('reset').disabled = true;
+            }
+        }
+
+        function dobKockak() {
+            return Array.from({ length: 5 }, () => Math.floor(Math.random() * 6) + 1);
+        }
+
+        function ellenorizDupla(kockak) {
+            return kockak.some(kocka => kockak.filter(k => k === kocka).length === 2);
+        }
+
+        function ellenorizTripla(kockak) {
+            return kockak.some(kocka => kockak.filter(k => k === kocka).length === 3);
+        }
+
+        function ellenorizDuplaTripla(kockak) {
+            return ellenorizDupla(kockak) && ellenorizTripla(kockak);
+        }
+
+        function ellenorizKisSor(kockak) {
+            kockak.sort((a, b) => a - b);
+            return kockak.slice(0, -1).every((val, index) => val + 1 === kockak[index + 1]);
+        }
+
+        function ellenorizNagySor(kockak) {
+            kockak.sort((a, b) => a - b);
+            return kockak.every((val, index) => index === 0 || val === kockak[index - 1] + 1);
+        }
+
+        function kockapoker(kockak) {
+            const kockakStr = kockak.join(", ");
+            if (ellenorizDuplaTripla(kockak)) {
+                return `Dobások: ${kockakStr}. Eredmény: Dupla tirpla`;
+            } else if (ellenorizKisSor(kockak)) {
+                return `Dobások: ${kockakStr}. Eredmény: Kis sor`;
+            } else if (ellenorizNagySor(kockak)) {
+                return `Dobások: ${kockakStr}. Eredmény: Nagy sor`;
+            } else if (ellenorizTripla(kockak)) {
+                return `Dobások: ${kockakStr}. Eredmény: Tripla`;
+            } else if (ellenorizDupla(kockak)) {
+                return `Dobások: ${kockakStr}. Eredmény: Dupla`;
+            } else {
+                return `Dobások: ${kockakStr}. Eredmény: Nincs semmi`;
+            }
+        }
+
+        /*
+        function runSimulation() {
+            const resultsDiv = document.getElementById('results');
+            // Ne törölje a korábbi eredményeket
+            const kockak = dobKockak();
+            const result = kockapoker(kockak);
+            const resultElement = document.createElement('p');
+            resultElement.textContent = result;
+            resultsDiv.appendChild(resultElement);
+        }
+        */
+
+
+        function runSimulation() {
+            const resultsDiv = document.getElementById('results');
+            // Clear the results div to remove previous results
+            resultsDiv.innerHTML = '';
+            const kockak = dobKockak();
+            const result = kockapoker(kockak);
+            const resultElement = document.createElement('p');
+            resultElement.textContent = result;
+            resultsDiv.appendChild(resultElement);
+        }
+
+    </script>
+</body>
+
+</html>
